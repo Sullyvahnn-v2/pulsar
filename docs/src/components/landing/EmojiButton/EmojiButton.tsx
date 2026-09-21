@@ -13,16 +13,17 @@ const emojiMap = {
 
 interface EmojiButtonProps {
   emoji: string;
-  size?: 'large' | 'small';
+  size?: 'large' | 'medium' | 'small';
+  className?: string;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
-export function EmojiButton({ emoji, size = 'large', onClick }: EmojiButtonProps) {
+export function EmojiButton({ emoji, size = 'large', className = '', onClick }: EmojiButtonProps) {
   const emojiSrc = emojiMap[emoji as keyof typeof emojiMap]?.src || '';
-  const buttonClass = size === 'large' ? styles.large : styles.small;
+  const buttonClass = styles[size];
 
   return (
-    <div className={`${styles.buttonBackground} ${buttonClass}`}>
+    <div className={`${styles.buttonBackground} ${buttonClass} ${className}`}>
       <div className={styles.button} onClick={onClick}>
         <img className={styles.emoji} src={emojiSrc} alt={`${emoji} emoji`} />
       </div>
